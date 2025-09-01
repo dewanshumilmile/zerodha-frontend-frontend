@@ -30,7 +30,7 @@ function Login() {
         // Example: localStorage.setItem('token', data.token);
 
         // Redirect to dashboard or another protected page
-        window.location.href = "http://localhost:3000";
+        window.location.href = "http://localhost:3000/";
       } else {
         setError(data.message || "Login failed. Please try again.");
       }
@@ -40,30 +40,41 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: 300, margin: "auto" }}>
-      <h2>Login</h2>
-      {error && <div style={{ color: "red" }}>{error}</div>}
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h2>Login</h2>
+        
+        {error && <div className="message error-message">{error}</div>}
 
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-        />
-      </div>
-      <button type="submit">Log In</button>
-    </form>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <button type="submit" className="submit-btn">
+          Log In
+        </button>
+      </form>
+    </div>
   );
 }
 

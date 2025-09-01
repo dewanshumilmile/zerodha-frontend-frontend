@@ -8,7 +8,7 @@ function SignupForm() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // ← Add navigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ function SignupForm() {
 
       if (data.success) {
         // Redirect to dashboard on successful signup
-        window.location.href = "http://localhost:3000";
+        window.location.href = "http://localhost:3000/";
       } else {
         // Redirect to login if user already exists (adjust condition if needed)
         if (data.message && data.message.toLowerCase().includes("already exists")) {
@@ -50,41 +50,54 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: 300, margin: "auto" }}>
-      <h2>Sign Up</h2>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit} className="signup-form">
+        <h2>Sign Up</h2>
 
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {message && <div style={{ color: "green" }}>{message}</div>}
+        {error && <div className="message error-message">{error}</div>}
+        {message && <div className="message success-message">{message}</div>}
 
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          autoComplete="username"
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          autoComplete="new-password"
-        />
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            autoComplete="username"
+            placeholder="Enter your username"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            autoComplete="email"
+            placeholder="Enter your email"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            autoComplete="new-password"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <button type="submit" className="submit-btn">
+          Sign Up
+        </button>
+      </form>
+    </div>
   );
 }
 
